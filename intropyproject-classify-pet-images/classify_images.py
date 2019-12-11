@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/classify_images.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                 
-# REVISED DATE: 
+# PROGRAMMER: Alex Tkatchev
+# DATE CREATED: 9/4/19                                
+# REVISED DATE: 9/4/19 
 # PURPOSE: Create a function classify_images that uses the classifier function 
 #          to create the classifier labels and then compares the classifier 
 #          labels to the pet image labels. This function inputs:
@@ -12,7 +12,7 @@
 #             and as in_arg.dir for function call within main. 
 #            -The results dictionary as results_dic within classify_images 
 #             function and results for the functin call within main.
-#            -The CNN model architecture as model within classify_images function
+#            -The CNN model architecture as model wihtin classify_images function
 #             and in_arg.arch for the function call within main. 
 #           This function uses the extend function to add items to the list 
 #           that's the 'value' of the results dictionary. You will be adding the
@@ -23,12 +23,6 @@
 # Imports classifier function for using CNN to classify images 
 from classifier import classifier 
 
-# TODO 3: Define classify_images function below, specifically replace the None
-#       below by the function definition of the classify_images function. 
-#       Notice that this function doesn't return anything because the 
-#       results_dic dictionary that is passed into the function is a mutable 
-#       data type so no return is needed.
-# 
 def classify_images(images_dir, results_dic, model):
     """
     Creates classifier labels with classifier function, compares pet labels to 
@@ -65,4 +59,43 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
+    for key in results_dic:
+        #call classifier function to classify the images 
+        #filename(key) and model   
+        #pet_images/Basenji_00974.jpg, vgg
+        #returns model_label as classifier label as type string       
+        model_label = classifier(images_dir+key, model)
+        
+        #Process the results so they can be compared with pet_image label
+        #set labels to lowercase and strip whitespace
+        model_label = model_label.lower()
+        model_label = model_label.strip()
+        
+        #result_dic gets appended using the append() method with the return of the classifier() method 
+        results_dic[key].append(model_label)
+        #define truth as pet image label
+        truth = results_dic[key][0]
+        
+        #If the pet image label is found within the classifier label list of terms
+        #as an exact match to one of the terms in the list - then they are added to
+        #results_dic as an exact match(1) using extend list function
+        #result_dic gets a 1 or 0 appended using the append() method 
+        #if the image label is found in the classifier label.
+        if truth in model_label:
+            results_dic[key].append(1)
+        #if not found then add to results dictionary as NOT a mathch
+        else:
+            results_dic[key].append(0)
+    
+    #DEBUG
+    #print("\n classify_images.py: results_dic:\n", results_dic)
+    #for key in results_dic:
+    #    print("\nFilename=", key,
+    #            "\nlabel=", results_dic[key][0],
+    #            "\nimage=", results_dic[key][1])
+                #"\nthird", results_dic[key][2])        
+            
+    #       This function doesn't return anything because the 
+    #       results_dic dictionary that is passed into the function is a mutable 
+    #       data type so no return is needed.
     None 

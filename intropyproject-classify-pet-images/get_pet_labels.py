@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/get_pet_labels.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:                                  
-# REVISED DATE: 
+# PROGRAMMER: Alex Tkatchev
+# DATE CREATED: 9/4/19                                
+# REVISED DATE: 9/4/19 
 # PURPOSE: Create the function get_pet_labels that creates the pet labels from 
 #          the image's filename. This function inputs: 
 #           - The Image Folder as image_dir within get_pet_labels function and 
@@ -19,10 +19,6 @@
 # Imports python modules
 from os import listdir
 
-# TODO 2: Define get_pet_labels function below please be certain to replace None
-#       in the return statement with results_dic dictionary that you create 
-#       with this function
-# 
 def get_pet_labels(image_dir):
     """
     Creates a dictionary of pet labels (results_dic) based upon the filenames 
@@ -40,6 +36,42 @@ def get_pet_labels(image_dir):
       List. The list contains for following item:
          index 0 = pet image label (string)
     """
-    # Replace None with the results_dic dictionary that you created with this
-    # function
-    return None
+    #Retrieve the filenames from the folder image_dir using listdir()
+    filename_list = listdir(image_dir)
+    #print(filename_list) #DEBUG
+    
+    #Creates an empty dictionary, that will hold Pet Image filename (keys), 
+    #filenames labels (as values)
+    results_dic = {}
+    
+    #Processes through each file in the directory, extracting only the words
+    #of the file that contain the pet image label   
+    for idx in range(0, len(filename_list), 1):
+        #Skips files that start with "." since its not a pet image file
+        if filename_list[0] != ".":
+            #Sets string to lower case letters
+            low_pet_label = filename_list[idx].lower()
+            #Splits lower case string by _ to break into words
+            word_list_pet_label = low_pet_label.split("_")
+            #Creates temporary label variable to hold pet label name
+            pet_label = ""
+            #Loops to check if word in pet name is only alphabetic characters
+            #if true append word to pet_label seperated by trailing space
+            for word in word_list_pet_label:
+                if word.isalpha():
+                    pet_label += word + " "
+            #Strip off starting/trailing whitespace characters
+            pet_label = pet_label.strip()
+            #If filename doesn\'t already exist in dictionary add it and it\'s
+            #pet_label, otherwise print an erro message indicating duplicate files
+            #(filename)
+            if filename_list[idx] not in results_dic:
+                results_dic[filename_list[idx]] = [pet_label]
+            else:
+                print("** Warning: Duplicate file exist in directory", filename_list[idx])
+    #DEBUG iterating through a dictionary printing all key & their associated values
+    #print("\nPrinting all key-value pairs in dictionary results_dic:")
+    #for key in results_dic:
+        #print("Filename=", key, " Pet Label=", results_dic[key][0])
+                
+    return results_dic

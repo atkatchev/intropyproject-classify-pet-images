@@ -1,0 +1,88 @@
+Command Line Arguments:
+     dir = uploaded_images/ 
+    arch = alexnet 
+ dogfile = dognames.txt
+
+Pet Image Label Dictionary has 6 key-value pairs.
+Below are 6 of them:
+ 1 key:                  Rabbit_01.jpg  label:                     rabbit
+ 2 key:                   Gecko_01.jpg  label:                      gecko
+ 3 key:                     Dog_01.jpg  label:                        dog
+ 4 key:                     Dog_02.jpg  label:                        dog
+ 5 key:                  Bucket_01.jpg  label:                     bucket
+ 6 key:              Coffee_mug_01.jpg  label:                 coffee mug
+
+     MATCH:
+
+                 Rabbit_01.jpg: 
+Real:                     rabbit   Classifier: wood rabbit, cottontail, cottontail rabbit, rabbit
+
+                 Bucket_01.jpg: 
+Real:                     bucket   Classifier:                   bucket, pail
+
+             Coffee_mug_01.jpg: 
+Real:                 coffee mug   Classifier:                     coffee mug
+
+ NOT A MATCH:
+
+                  Gecko_01.jpg: 
+Real:                      gecko   Classifier:               alligator lizard
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier:               golden retriever
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier:                      chihuahua
+
+# Total Images 6 # Matches: 3 # NOT Matches: 3
+
+     MATCH:
+
+                 Rabbit_01.jpg: 
+Real:                     rabbit   Classifier: wood rabbit, cottontail, cottontail rabbit, rabbit  
+PetLabelDog: 0  ClassLabelDog: 0
+
+                 Bucket_01.jpg: 
+Real:                     bucket   Classifier:                   bucket, pail  
+PetLabelDog: 0  ClassLabelDog: 0
+
+             Coffee_mug_01.jpg: 
+Real:                 coffee mug   Classifier:                     coffee mug  
+PetLabelDog: 0  ClassLabelDog: 0
+
+ NOT A MATCH:
+
+                  Gecko_01.jpg: 
+Real:                      gecko   Classifier:               alligator lizard  
+PetLabelDog: 0  ClassLabelDog: 0
+
+                    Dog_01.jpg: 
+Real:                        dog   Classifier:               golden retriever  
+PetLabelDog: 1  ClassLabelDog: 1
+
+                    Dog_02.jpg: 
+Real:                        dog   Classifier:                      chihuahua  
+PetLabelDog: 1  ClassLabelDog: 1
+
+# Total Images 6 # Matches: 3 # NOT Matches: 3
+
+ ** Statistics from calculates_results_stats() function:
+N Images:  6  N Dog Images:  2  N NotDog Images:  4 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+ ** Check Statistics - calculated from this function as a check:
+N Images:  6  N Dog Images:  2  N NotDog Images:  4 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed:   0.0
+
+
+*** Resuts Summary for CNN Model Architecture ALEXNET ***
+pct_match           :  50.000000
+pct_correct_dogs    : 100.000000
+pct_correct_breed   :   0.000000
+pct_correct_notdogs : 100.000000
+
+INCORRECT Dog Breed Assignment:
+Real:                        dog   Classifier:               golden retriever
+Real:                        dog   Classifier:                      chihuahua
+
+** Total Elapsed Runtime: 0:0:1
